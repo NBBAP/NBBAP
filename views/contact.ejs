@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('./partials/head.ejs') %>
+    
+<body>
+    <nav>
+        <img id="logo" src="/public/Logo.png" alt="logo"><a href="#"></a>
+
+        <ul>
+            <li><a href="/">Home</li></a>
+            <li><a href="/about">About</li></a>
+            <li><a href="/contact">Contact</li></a>
+        </ul>  
+    </nav>
+
+    <div class="container">
+        <form action="action_page.php">
+      
+          <label for="fname">Voornaam</label>
+          <input type="text" id="fname" name="firstname" placeholder="Uw voornaam ...">
+      
+          <label for="lname">Achternaam</label>
+          <input type="text" id="lname" name="lastname" placeholder="Uw achternaam ...">
+      
+          <label for="subject">Bericht</label>
+          <textarea id="subject" name="subject" placeholder="Schijf uw bericht in" style="height:200px"></textarea>
+      
+          <input type="submit" value="Verzenden">
+      
+        </form>
+      </div> 
+
+      <%- include('./partials/footer.ejs') %>
+</body>
+</html>

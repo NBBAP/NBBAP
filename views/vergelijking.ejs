@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+<style>
+    .byWinst {color:green;}
+    .byVerlies {color:red;}
+    .container{
+        display: flex;
+        justify-content: space-around;
+    };
+   
+</style>
+<body>
+        <nav>
+            <img id="logo" src="/public/Logo.png" alt="logo"><a href="#"></a>
+            <ul>
+                <li><a href="/">Home</li></a>
+                <li><a href="/about">About</li></a>
+                <li><a href="/contact">Contact</li></a>
+            </ul>  
+        </nav>
+    <div class="vergelijk">
+        <form action="/" method="post">
+            <label for="ondernemingsnummers">Ondernemingsnummer:</label>
+            <input type="text" id="ondernemingsnummer1" name="ondernemingsnummer1">
+            <button type="submit">Vergelijk </button><br>
+            <br>
+            <br>
+            <label for="ondernemingsnummers">Ondernemingsnummer:</label>
+            <input type="text" id="ondernemingsnummer2" name="ondernemingsnummer2">
+        </form>
+
+        <div class="container">
+
+        
+        <div class="kolom">
+            <div>
+                <strong>Naam</strong>&nbsp;&nbsp;&nbsp;<%= bedrijven[0].name %><br>
+                <strong>Adres</strong>&nbsp;&nbsp;&nbsp;<%= bedrijven[0].address %><br><br>
+                <div>
+                    <strong>Datum neerlegging</strong><div class="floatRight"><%= bedrijven[0].datumNeerlegging %></div> <br>
+                    <strong>EigenVermogen</strong><div ><%= bedrijven[0].eigenVermogen  %></div><br>
+                    <strong>Schulden</strong><div class="floatRight"><%= bedrijven[0].schulden %></div><br>
+                    <strong>Bedrijfswinst</strong><div class="floatRight"><%= bedrijven[0].bedrijfsWinst %></div><br>
+                </div>
+            </div>
+        </div>
+        <div class="kolom">
+            <div>
+                <strong>Naam</strong>&nbsp;&nbsp;&nbsp;<%= bedrijven[1].name %><br>
+                <strong>Adres</strong>&nbsp;&nbsp;&nbsp;<%= bedrijven[1].address %><br><br>
+                <div>
+                    <strong>Datum neerlegging</strong><div class="floatRight"><%= bedrijven[1].datumNeerlegging %></div><br>
+                    <strong>EigenVermogen</strong><div class="floatRight"  > <%= bedrijven[1].eigenVermogen %></p><br>
+                    <strong>Schulden</strong><div class="floatRight"><%= bedrijven[1].schulden %></div><br>
+                    <strong>Bedrijfswinst</strong><div class="floatRight"><%= bedrijven[1].bedrijfsWinst %></div><br>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    </div> 
+
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>
