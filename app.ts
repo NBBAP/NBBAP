@@ -39,8 +39,7 @@ main();
 
 //  INIT & SETUP
 
-
-const uuidv8 = require("uuid/v8");
+const fetch = require('node-fetch');
 const express = require('express');
 const app = express();
 
@@ -81,25 +80,6 @@ const bedrijven:Onderneming[] = [
     }
 ]
 
-//  FUNCTIONS
-
-const GetApiUrl = (referenceNumber: string) => {
-
-    //basisurl + referencenummer
-    let env = `ws.uat2.cbso.nbb.be`;
-    let apiName = `authentic`;
-    let operation = `deposit/${referenceNumber}/accountingData`;
-    
-    //query's
-    let subKey = `091539ea0adb414d9eb51977a6afd3a8`;
-    let reqId = "1234567890123456";
-    let accept = "application/json";
-
-    //FullUrl with query's
-    let apiUrl = `https://${env}/${apiName}/${operation}?NBB-CBSO-Subscription-Key=${subKey}&X-Request-Id=${reqId}&Accept=${accept}`;
-    return apiUrl;
-}
-
 //  ROUTES
 
 app.get('/', (req:any, res:any) => {
@@ -107,21 +87,117 @@ app.get('/', (req:any, res:any) => {
 });
 
 app.post('/', (req:any, res:any) => {
-    let data = req.body;
 
-    //  api call met beide kbonummers
-    //      const resp = await fetch(apiUrl)
-    //      const bedrijven = resp.json();
+    // legen objecten aanmaken en fetch promises
 
-    //  object aanmaken voor beide ondernemingen
-    //  opslagen in database en output geven
+    let woord = "origineel";
+
+    let onderneming1: any = {};
+    let onderneming2: any = {};
+
+    let onderneming1Cijfers: any = {};
+    let onderneming2Cijfers: any = {};
+
     
-    //res.json(bedrijven);
 
-    res.render('vergelijking', {bedrijven: bedrijven}, 
-    );
+    let promise1 = fetch(`https://ws.uat2.cbso.nbb.be/authentic/legalEntity/${req.body.ondernemingsnummer1}/references`,{
+        headers:{
+            'Accept' : 'application/json',
+            'NBB-CBSO-Subscription-Key' : '091539ea0adb414d9eb51977a6afd3a8',
+            'X-Request-Id' :''
+            }}).then((response:any)=> response.json());;
+
+    let promise2 = fetch(`https://ws.uat2.cbso.nbb.be/authentic/legalEntity/${req.body.ondernemingsnummer2}/references`,{
+        headers:{
+            'Accept' : 'application/json',
+            'NBB-CBSO-Subscription-Key' : '091539ea0adb414d9eb51977a6afd3a8',
+            'X-Request-Id' :''
+            }}).then((response:any)=> response.json());;
+
+
+    // Json data toewijzen bij onderming-objecten
+    
+
+    Promise.all([promise1,promise2])
+    .then((json:any)=>{
+        onderneming1 = json[0];
+        
+        bedrijven[0].name = `${onderneming1[0].EnterpriseName}`;
+        bedrijven[0].address = `${onderneming1[0].Address.Street} ${onderneming1[0].Address.Number} ${onderneming1[0].Address.City}`;
+        bedrijven[0].datumNeerlegging = `${onderneming1[0].DepositDate}`;
+
+        onderneming2 = json[1];
+        bedrijven[1].name = `${onderneming2[0].EnterpriseName}`;
+        bedrijven[1].address = `${onderneming2[0].Address.Street} ${onderneming2[0].Address.Number} ${onderneming2[0].Address.City}`;
+        bedrijven[1].datumNeerlegging = `${onderneming2[0].DepositDate}`;
+
+        //  2de api call voor de cijfers uit te lezen
+
+        let nummerOnderneming1 = onderneming1[0].ReferenceNumber;
+        let nummerOnderneming2 = onderneming2[0].ReferenceNumber;
+
+        let promise3 = fetch(`https://ws.uat2.cbso.nbb.be/authentic/deposit/${nummerOnderneming1}/accountingData`,{
+            headers:{
+                'Accept' : 'application/x.jsonxbrl',
+                'NBB-CBSO-Subscription-Key' : '091539ea0adb414d9eb51977a6afd3a8',
+                'X-Request-Id' :''
+                }}).then((response:any)=> response.json());;
+    
+        let promise4 = fetch(`https://ws.uat2.cbso.nbb.be/authentic/deposit/${nummerOnderneming2}/accountingData`,{
+            headers:{
+                'Accept' : 'application/x.jsonxbrl',
+                'NBB-CBSO-Subscription-Key' : '091539ea0adb414d9eb51977a6afd3a8',
+                'X-Request-Id' :''
+                }}).then((response:any)=> response.json());;
+        Promise.all([promise3, promise4])
+        .then((json:any)=>{
+
+            //  onderneming 1 cijfers toekennen aan het object
+
+            let onderneming1Cijfers = json[0];
+            
+
+            for (let i = 0;i<onderneming1Cijfers.lenght;i++){
+                
+                if(onderneming1Cijfers[i].Code == '10/15'){
+                    bedrijven[0].eigenVermogen = onderneming1Cijfers[i].Value;
+                }
+                if(onderneming1Cijfers[i].Code = '42/48'){
+                    bedrijven[0].schulden = onderneming1Cijfers[i].Value;
+                }
+                if(onderneming1Cijfers[i].Code == ''){
+                    bedrijven[0].bedrijfsWinst = onderneming1Cijfers[i].Value;
+                }
+            }
+
+            //  onderneming 2 cijfers toekenne aan het object
+
+            //  periode 'N' pakken en NIET 'nm1'
+
+            let onderneming2Cijfers = json[1];
+            for (let i = 0;i<onderneming2Cijfers.lenght;i++){
+                if(onderneming2Cijfers[i].Code == '10/15'){
+                    bedrijven[1].eigenVermogen = onderneming1Cijfers[i].Value;
+                }
+                if(onderneming2Cijfers[i].COde == '42/48'){
+                    bedrijven[1].schulden = onderneming1Cijfers[i].Value;
+                }
+                if(onderneming2Cijfers[i].Code == ''){
+                    bedrijven[1].bedrijfsWinst = onderneming1Cijfers[i].Value;
+                }
+            }
+
+            console.log(`eigen vermogen: ${bedrijven[0].eigenVermogen}`);
+
+        })
+        console.log(woord);
+        
+        res.render('vergelijking', {bedrijven: bedrijven}
+    )})
+    .catch((err:any)=>{
+        console.log('Er is een foutmelding opgetreden: ' + err.message);
+    })
 });
-
 
 app.get('/about', (req:any, res:any) =>{
     res.render('about');
@@ -139,3 +215,5 @@ app.listen(app.get('port'), ()=>console.log( `[server] http://localhost:` + app.
 app.use((req:any, res:any) => {
     res.status(404).render('index');
 })
+
+export{};

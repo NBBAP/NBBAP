@@ -14,24 +14,27 @@
     <div class="vergelijk">
         <form action="/" method="post">
             <label for="ondernemingsnummers">Ondernemingsnummer:</label>
-            <input type="text" id="ondernemingsnummer1" name="ondernemingsnummer1">
-            <button type="submit">Vergelijk </button><br>
-            <br>
+            <input type="text" id="ondernemingsnummer1" name="ondernemingsnummer1" style="width: 350px;"><br>
+            <button type="submit" class="vergelijkButton"> Vergelijk </button><br>
             <br>
             <label for="ondernemingsnummers">Ondernemingsnummer:</label>
-            <input type="text" id="ondernemingsnummer2" name="ondernemingsnummer2">
+            <input type="text" id="ondernemingsnummer2" name="ondernemingsnummer2" style="width: 350px;">
         </form>
     </div>
     <div>
         <section>
             <p>
-                Vele Belgische ondernemingen zijn verplicht een Jaarrekening neer te leggen waaruit de economische en financiële situatie van het bedrijf blijkt.   Voor vele vennootschappen is dat wettelijk verplicht onder een verkorte vorm.  Voor grotere vennootschappen is dat een verplichting onder de “volledige” vorm.   Dat wil zeggen uitgebreider en meer gedetailleerd. 
+            Vele Belgische ondernemingen zijn verplicht een Jaarrekening neer te leggen waaruit de economische en financiële situatie van het bedrijf blijkt.   Voor vele vennootschappen is dat wettelijk verplicht onder een verkorte vorm.  Voor grotere vennootschappen is dat een verplichting onder de “volledige” vorm.   Dat wil zeggen uitgebreider en meer gedetailleerd. 
             </p><br>
             <p>Kleine ondernemingen (bijvoorbeeld, eenmanszaken, VOF, cv, enz) zijn vrijgesteld van jaarrekening plicht.  Dat wil zeggen, ze mogen een jaarrekening neerleggen maar ze moeten het niet. De vraag is natuurlijk.  Wie kan een jaarrekening interpreteren? </p><br>
             <p>Deze site geeft u een eerste inzicht in de interpretatie van deze cijfers waardoor het u toegelaten is een oordeel te vellen over het te controleren bedrijf. Wij halen voor u de cijfers op en geven u een eerste score. </p>
+            <br><br>
+            <p>*Hieronder vind u ondernemingsnummers die in de database zijn opgeslagen.</p>
+            <p>LET OP: Deze ondernemingsnummer missen vanvoor een '0', zet deze er dus zelf nog voor.</p>
+            <br>
+            <img src="/public/ondernemingen.png" width="500">
         </section>
     </div>
-    
 
     <%- include('./partials/footer.ejs') %>
 </body>
