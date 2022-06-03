@@ -17,6 +17,13 @@
             text-decoration: none;
             color: #222;
         }
+        body a{
+            text-decoration: underline;
+            color: blue;
+        }
+        nav a{
+            text-decoration: none;
+        }
 
         nav {
             display: flex;
@@ -41,15 +48,11 @@
         nav p, nav a {
             color: rgb(36, 86, 45);
         }
-        footer {
-            background-color: rgb(68, 132, 130);
-            text-align: center;
-            margin: 100px auto;
-        }
         .vergelijk {
             margin: auto;
             text-align: center;
             width: 80%; 
+            margin: 100px auto;
             padding: 10px;
 
         }
@@ -63,13 +66,17 @@
         }
         
         footer {
-            position: fixed;
-            height: 50px;
-            background-color: rgb(115, 183, 71);
+            text-align: center;
+            position: static ;
+            height: 0px;
+            background-color: #ffebbb;
             bottom: 0px;
             left: 0px;
             right: 0px;
             margin-bottom: 0px;
+            border-top: 1px solid black;
+            padding: 2%;
+
         }
 
         input[type=text], select, textarea {
@@ -97,21 +104,35 @@
         }
         section{
             padding: 10%;
-            padding-top: 5%;
+            padding-top: 0%;
             font-size: 17px;
+        }
+        .row{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
         }
         .column{
             padding: 1rem;
+            width: 420px;
+            
+            flex-direction: column;
+            
         }
         .column img {
             float: left;
+            max-width: 9rem;
             width: 9rem;
-            border-radius: 50%;
+            border-radius: 50% 50% 50% 50%;
             margin-right: 2rem;
         }
         
         .container {
             padding: 20px;
         } 
+
+       
     </style>
+    
+
 </head>

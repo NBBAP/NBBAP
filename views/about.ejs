@@ -11,21 +11,36 @@
             <li><a href="/">Home</li></a>
             <li><a href="/about">About</li></a>
             <li><a href="/contact">Contact</li></a>
-            <li><a href="/history>">History</a></li>
+            <li><a href="/history">History</a></li>
         </ul>  
     </nav>
-
-    <div class="Over-ons">
-        <h1>Over ons</h1>
-        <p>We zijn de studenten aan ap.</p><hr>
+    <div>
+    </div>
+    <section>
+    <div class="Over-ons" style="border-bottom: 1px solid black">
+        <h1>Over de applicatie</h1><br>
+        <p>Er wordt gevraagd om 2 ondernemingnummers in te geven in de inputvelden op de <a href="/home">Home pagina</a> . De applicatie gaat dan een 'call' doen met deze nummers naar de API van de nationale bank van Beglië.
+        Hieruit zullen gegevens terugkomen zoals de namen, addressen en referentienummers.<br><br> Eenmaal hij de referentienummers heeft gaat hij een 2de API 'call' doen naar een ander deel op die server.
+        Uit het antwoord van deze call kunnen we dan de cijfers uitlezen zoals winst, vermogen, schulden, etc... </p><br>
+        <p>Hierna word de informatie van beide ondernemingen getoond op het scherm en vergeleken met elkaar. Wanneer een cijfer beter is dan die van de andere onderneming zal deze in het GROEN staan, als deze slechter is zal deze in het ROOD staan.<br>
+        <p>De gegevens die u dan kan zien worden direct opgeslagen in een database. Als u deze gegevens wilt terug vinden moet u naar de <a href="/history">'History'</a>  pagina gaan.<br><br>
+        Als u op de History pagina hebt geklikt zal de applicatie de database aanspreken en deze helemaal uitlezen en tonen. (Dit kan een paar seconden duren). U hebt hier de optie om de geschiedenis te verwijderen en de database leeg te maken moest u dat willen.<br><br>
+        Op de <a href="/contact">'contact'</a> pagina vind u een formulier waarmee u ons kan contacteren. Dit formulier is zo ingesteld dat het een mail verstuurd naar nbbap.team@gmail.com. Vergeet zeker niet uw juiste mail in te voeren zodat wij u terug kunnen contacteren.</p><br>
+        <br><div style="border-bottom: 1px solid black;"></div><br>
+        </p>  
+        <h1>Over ons</h1><br>
+        <p>We zijn de studenten van de <a href="https://www.ap.be">AP Hogeschool</a> in Antwerpen en hebben deze applicatie ontworpen voor ons eindwerk van het vak IT project.
+        Wij hopen dat de applicatie u kan helpen en dat deze wenst naargelang de verwachtingen.<br><br>
+        Hebt u vragen of opmerkingen in verband met de applicatie, aarzel niet om ons te contacteren via de <a href="/contact">'contact'</a>pagina.<br>
+        Hieronder vind u een overzicht van het NBBAP-team, U kan hen persoonlijk een mail sturen als u wenst ze induvidueel te contacteren</p><br>
         <br>
       </div>
-      
-      <h2 style="text-align:center">Het Team</h2><br>
+      <br><br>
+      <h2 style="text-align:center">Het NBBAP-Team</h2><br>
       <div class="row">
         <div class="column">
           <div class="card">
-            <img src="../public/no_profic_pic.png" alt="Erik">
+            <img src="../public/erik stuer.png" alt="Erik">
             <div class="container">
               <h2>Erik Stuer</h2>
               <p class="title">CEO & Founder</p>
@@ -70,6 +85,7 @@
           </div>
         </div>
       </div>
+    </section>
 
     <%- include('./partials/footer.ejs') %>
 </body>

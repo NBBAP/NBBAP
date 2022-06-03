@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBBAP</title>
+</head>
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <nav>
+        <img id="logo" src="/public/Logo.png" alt="logo"><a href="#"></a>
+
+        <ul>
+            <li><a href="/">Home</li></a>
+            <li><a href="/about">About</li></a>
+            <li><a href="/contact">Contact</li></a>
+            <li><a href="/history">History</li></a>
+        </ul>  
+    </nav>
+    
+    <h1>ERROR</h1><br>
+    <p>Er is helaas een fout opgetreden. Kijk naar onderstaande opties om deze op te lossen.</p>
+    <ol>
+        <p>-   &nbsp;&nbsp;Kijk na of de ingegeven ondernemingsnummers correct zijn.<br>&nbsp;&nbsp;&nbsp;&nbsp;Let op: niet alle ondernemingnummers kan je terugvinden in de database.</p><br>
+        <p>-   &nbsp;&nbsp;Heeft u een goede internet verbinding.</p><br>
+        <p>-   &nbsp;&nbsp;Mogelijks ligt de fout bij de applicatie en/of de server,<br>&nbsp;&nbsp;&nbsp;
+               in dit geval bieden wij onze excuses aan en vragen wij u om het later nog eens te proberen.</p><br>
+        
+    </ol>
+    <p>Hebt u nog vragen of blijft er een fout optreden mag u ons contacteren via de <a href="contact">contact</a> pagina.</p>
+
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

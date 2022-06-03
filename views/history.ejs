@@ -1,17 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('./partials/head.ejs') %>
-<body>
-    <nav>
-        <img id="logo" src="/public/Logo.png" alt="logo"><a href="#"></a>
+<%- include('./partials/head.ejs') %>
 
-        <ul>
-            <li><a href="/">Home</li></a>
-            <li><a href="/about">About</li></a>
-            <li><a href="/contact">Contact</li></a>
-            <li><a href="/history>"History</a></li>
-        </ul>  
-    </nav>
-    <%- include('./partials/footer.ejs') %>
-</body>
+    <style>
+        .page-contain {
+            display: flex;
+            background: #E7F3F1;
+            border: .75em solid white;
+            padding: 2em;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .section-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 30.75em;
+            /* min-height: 20.75em; */
+            overflow: hidden;
+            border-radius: .5em;
+            text-decoration: none;
+            background: white;
+            padding: 2.75em 2.5em;
+            transition: transform .45s ease, background .45s ease;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+            margin: 1.5em auto;
+        }
+
+        .section-img {
+            height: 75px;
+            width: 75px;
+        }
+
+        .section-title-img-container {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section-title-img-container :last-child {
+            align-self: flex-start;
+        }
+
+        .section-title-desc {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+        }
+
+        .section-date {
+            align-self: flex-start;
+            padding-top: 5px;
+        }
+        .cijfers{
+            height: 150px;
+            display: block;
+        }
+        .arrow {
+            border: solid black;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+        }
+
+        .right {
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+        }
+
+        h3 {
+            padding-left: 15px;
+            color: #242a2c;
+            font-weight: 600;
+            line-height: 1;
+            transition: color .45s ease, border .45s ease;
+        }
+
+        p {
+            padding-left: 15px;
+        }
+    </style>
+    
+
+    <body>
+        <nav>
+            <img id="logo" src="/public/Logo.png" alt="logo"><a href="#"></a>
+
+            <ul>
+                <li><a href="/">Home</li></a>
+                <li><a href="/about">About</li></a>
+                <li><a href="/contact">Contact</li></a>
+                <li><a href="/history">History</li></a>
+            </ul>
+        </nav>
+        <section>
+            <h1>History</h1>
+            <button onclick="myFunction()">Click me</button>
+            <p id="demo">wateee</p>
+            <a style="float: right" href="/removehistory">Remove History</a><br><br>
+        
+
+        <div class="search-box">
+            <input type="text" placeholder="search" class="search">
+            <a href="#"><img src="../public/search.png"></a>
+        </div>
+
+        
+        
+
+        <% if(bedrijvenInDB.length==0){%>
+            <div>There is no History in the database.</div>
+            <% } %>
+
+                <div class="page-container">
+                    <% 
+                        let index = 0;
+                        bedrijvenInDB.forEach(e=> {
+                            index++;
+                        %>
+
+                        <section class="section-container">
+                            <div class="section-title-img-container">
+                                <img class="section-img"
+                                src="https://img.freepik.com/free-vector/home-icon-house-symbol-simple-vector-design-logo_231786-5048.jpg?w=2000"
+                                    alt="">
+
+                                <div class="section-title-desc">
+                                    <h3>
+                                        <%= e.name %>
+                                    </h3>
+
+                                    <br />
+                                    <p>
+                                        <%= e.address %>
+                                            <br />
+                                    </p>
+                                </div>
+                                <div class="section-date">
+                                    <p>
+                                        <%= e.datumNeerlegging %> <button id="btn<%= index %>" onclick="seeNumbers()" class="arrow right">click</button>
+                                    </p>
+                                </div>
+
+                            </div>
+                            <div class="cijfers">cijfers</div>
+
+                        </section>
+                        <% }); %>
+                </div>
+            </section>
+
+                <%- include('./partials/footer.ejs') %>
+                <script>
+                    
+                    let visuable = true;
+                    
+                    function seeNumbers(){
+
+                    let allCijfers = document.getElementsByClassName("cijfers");
+
+                    let idOfBtn = event.target.id;
+                    let lastCharOfId = idOfBtn.charAt(idOfBtn.length-1);
+                    if(visuable = false){
+                        console.log("wtff");
+                    }
+
+                    if(visuable = false){
+                        allCijfers[lastCharOfId-1].style.display = "block";
+                        visuable = true;
+                        console.log("if false");
+                        console.log(visuable)
+                    }
+                    if(visuable = true){
+                        allCijfers[lastCharOfId-1].style.display = "none";
+                        visuable = false;
+                        console.log("if true");
+                        console.log(visuable);
+                    }
+                    }
+                </script>
+    </body>
+
 </html>

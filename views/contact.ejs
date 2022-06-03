@@ -2,6 +2,28 @@
 <html lang="en">
 
     <%- include('./partials/head.ejs') %>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init('Hl-7mmMSvLYsDp0i4');
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // generate a five digit number for the contact_number variable
+                this.contact_number.value = Math.random() * 100000 | 0;
+                // these IDs from the previous steps
+                emailjs.sendForm('contact_service', 'contact_form', this)
+                    .then(function() {
+                        console.log('SUCCESS!');
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
     
 <body>
     <nav>
@@ -11,25 +33,35 @@
             <li><a href="/">Home</li></a>
             <li><a href="/about">About</li></a>
             <li><a href="/contact">Contact</li></a>
-            <li><a href="/history>">History</a></li>
+            <li><a href="/history">History</a></li>
         </ul>  
     </nav>
 
-    <div class="container">
-        <form action="action_page.php">
-      
-          <label for="fname">Voornaam</label>
-          <input type="text" id="fname" name="firstname" placeholder="Uw voornaam ...">
-      
-          <label for="lname">Achternaam</label>
-          <input type="text" id="lname" name="lastname" placeholder="Uw achternaam ...">
-      
-          <label for="subject">Bericht</label>
-          <textarea id="subject" name="subject" placeholder="Schijf uw bericht in" style="height:200px"></textarea>
-      
-          <input type="submit" value="Verzenden">
-      
+    <div >
+        <section>
+            <h1>Contact</h1><br>
+        <div style="border-bottom: 1px solid black;">
+            <p>Hebt u vragen over de werking van de applicatie, twijfel dan zeker niet om ons te contacteren.</p>
+            <p>Als u het volledige NBBAP-team wilt bereiken kan dat ook via deze weg.</p>
+            <p>Wilt u de medewerkens van deze applicatie induvidueel contacteren gelieve dit dan te doen via de <a href="/about">'about'</a> pagina.</p>
+        <br><br></div>
+        <br><br>
+        <p><strong>Bericht sturen</strong></p><br>
+        <form id="contact-form">
+            <input type="hidden" name="contact_number">
+
+            <label>Naam</label>
+            <input type="text" id="fname" name="user_name" placeholder="Uw naam ...">
+            
+            <label>Bericht</label>
+            <textarea id="subject" name="message" placeholder="Schijf uw bericht in" style="height:200px"></textarea>
+
+            <label>Uw E-mail</label>
+            <input type="email" id="lname" name="user_email" placeholder="vnaam.anaam@gmail.com"><br><br>
+
+            <input type="submit" value="Verzenden">
         </form>
+    </section>
       </div> 
 
       <%- include('./partials/footer.ejs') %>

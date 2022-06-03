@@ -18,6 +18,7 @@
                 <li><a href="/">Home</li></a>
                 <li><a href="/about">About</li></a>
                 <li><a href="/contact">Contact</li></a>
+                <li><a href="/history">History</li></a>
             </ul>  
         </nav>
     <div class="vergelijk">
@@ -31,17 +32,84 @@
         </form>
 
         <div class="container">
+            
+        <script>
+            console.log("hoi");
+        </script>
+
+
+        <%
+            let o1Vermogen = "";
+            let o2Vermogen = "";
+            let o1Winst = "";
+            let o2Winst = "";
+            let o1Schulden = "";
+            let o2Schulden = "";
+
+                
+            if (parseFloat(bedrijven[0].eigenVermogen) > parseFloat(bedrijven[1].eigenVermogen)){
+                o1Vermogen = `style=color:green`;
+                o2Vermogen = `style=color:red`;
+             } else if (parseFloat(bedrijven[0].eigenVermogen) < parseFloat(bedrijven[1].eigenVermogen)){
+                o1Vermogen = `style=color:red`;
+                o2Vermogen = `style=color:green`;
+            } else {
+                o1Vermogen = `style=color:black`;
+                o2Vermogen = `style=color:black`;
+            }
+        
 
         
+            if (parseFloat(bedrijven[0].schulden) > parseFloat(bedrijven[1].schulden)){
+                o1Schulden = `style=color:red`;
+                o2Schulden = `style=color:green`;
+            } else if (parseFloat(bedrijven[0].schulden) < parseFloat(bedrijven[1].schulden)){
+                o1Schulden = `style=color:green`;
+                o2Schulden = `style=color:red`;
+            } else {
+                o1Schulden = `style=color:black`;
+                o2Schulden = `style=color:black`;
+            }
+        
+
+        
+            if (parseFloat(bedrijven[0].bedrijfsWinst) > parseFloat(bedrijven[1].bedrijfsWinst)){
+                o1Winst = `style=color:green`;
+                o2Winst = `style=color:red`;
+              }  else if (parseFloat(bedrijven[0].bedrijfsWinst) < parseFloat(bedrijven[1].bedrijfsWinst)){
+                o1Winst = `style=color:red`;
+                o2Winst = `style=color:green`;
+            } else {
+                o1Winst = `style=color:black`;
+                o2winst = `style=color:black`;
+            }
+        
+
+          
+            
+                if (parseFloat(bedrijven[0].schulden) > parseFloat(bedrijven[1].schulden)){
+                    console.log(`De schulden van o1 : ${parseFloat(bedrijven[0].schulden)} zijn groter dan o2: ${parseFloat(bedrijven[1].schulden)}`);
+                }   
+                if (parseFloat(bedrijven[1].schulden) > parseFloat(bedrijven[0].schulden)){
+                    console.log(`De schulden van o1 : ${parseFloat(bedrijven[0].schulden)} zijn kleiner dan o2: ${parseFloat(bedrijven[1].schulden)}`);
+                } 
+            
+
+            console.log(bedrijven[0]);
+            console.log(bedrijven[1]);
+            
+        
+        %>
+
         <div class="kolom">
             <div>
                 <strong>Naam</strong>&nbsp;&nbsp;&nbsp;<%= bedrijven[0].name %><br>
                 <strong>Adres</strong>&nbsp;&nbsp;&nbsp;<%= bedrijven[0].address %><br><br>
                 <div>
                     <strong>Datum neerlegging</strong><div class="floatRight"><%= bedrijven[0].datumNeerlegging %></div> <br>
-                    <strong>EigenVermogen</strong><div ><%= bedrijven[0].eigenVermogen  %></div><br>
-                    <strong>Schulden</strong><div class="floatRight"><%= bedrijven[0].schulden %></div><br>
-                    <strong>Bedrijfswinst</strong><div class="floatRight"><%= bedrijven[0].bedrijfsWinst %></div><br>
+                    <strong>EigenVermogen</strong><div <%- o1Vermogen %> class="floatRight"><%= bedrijven[0].eigenVermogen  %></div><br>
+                    <strong>Schulden</strong><div <%- o1Schulden %> class="floatRight"><%= bedrijven[0].schulden %></div><br>
+                    <strong>Bedrijfswinst</strong><div <%- o1Winst %>  class="floatRight"><%= bedrijven[0].bedrijfsWinst %></div><br>
                 </div>
             </div>
         </div>
@@ -51,9 +119,9 @@
                 <strong>Adres</strong>&nbsp;&nbsp;&nbsp;<%= bedrijven[1].address %><br><br>
                 <div>
                     <strong>Datum neerlegging</strong><div class="floatRight"><%= bedrijven[1].datumNeerlegging %></div><br>
-                    <strong>EigenVermogen</strong><div class="floatRight"  > <%= bedrijven[1].eigenVermogen %></p><br>
-                    <strong>Schulden</strong><div class="floatRight"><%= bedrijven[1].schulden %></div><br>
-                    <strong>Bedrijfswinst</strong><div class="floatRight"><%= bedrijven[1].bedrijfsWinst %></div><br>
+                    <strong>EigenVermogen</strong><div <%- o2Vermogen %> class="floatRight"> <%= bedrijven[1].eigenVermogen %></div><br>
+                    <strong>Schulden</strong><div <%- o2Schulden %> class="floatRight"><%= bedrijven[1].schulden %></div><br>
+                    <strong>Bedrijfswinst</strong><div <%- o2Winst %>  class="floatRight"><%= bedrijven[1].bedrijfsWinst %></div><br>
                 </div>
             </div>
         </div>
@@ -66,5 +134,6 @@
             <img src="/public/ondernemingen.png" width="500">
 
     <%- include('./partials/footer.ejs') %>
+    
 </body>
 </html>
