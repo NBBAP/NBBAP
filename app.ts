@@ -1,4 +1,3 @@
-import { response } from "express";
 
 const { MongoClient, ObjectId } = require('mongodb');
 const uri = "mongodb+srv://jeroen:DB_password@cluster0.l80su.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
