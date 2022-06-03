@@ -304,3 +304,5 @@ app.use((req:any, res:any) => {
     res.status(404).render('index');
 })
 
+export{};
+
