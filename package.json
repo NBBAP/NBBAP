@@ -23,5 +23,6 @@
     "url": "https://gitlab.apstudent.be/it-project-nbbap/nbbap.git"
   },
   "author": "\"Jeroen Folla\", \"Stuer Erik\", \"Prasain shubham\", \"Asmar Tiba\"",
-  "license": "ISC"
+  "license": "ISC",
+  "type": "module"
 }
